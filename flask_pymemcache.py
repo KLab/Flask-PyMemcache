@@ -56,7 +56,7 @@ Use
 """
 from __future__ import absolute_import, division, print_function
 import flask
-import pymemcache
+import pymemcache.client
 
 
 class FlaskMemcacheClient(pymemcache.client.Client):
