@@ -1,5 +1,6 @@
 services:
     - memcached
+language: python
 python: 3.3
 before_script: "pip install tox"
 script: "tox"
