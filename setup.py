@@ -18,5 +18,5 @@ setup(
     url='https://github.com/KLab/Flask-PyMemcache',
     description="pymemcache integration for Flask",
     long_description=readme,
-    install_requires=["Flask", "pymemcache>=1.2.1"],
+    install_requires=["Flask", "pymemcache>=1.2.1", "six"],
 )
