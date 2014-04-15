@@ -11,6 +11,11 @@ except IOError:
 
 setup(
     name="Flask-PyMemcache",
+    version='0.0.1',
+    py_modules=['flask_pymemcache'],
+    author='INADA Naoki',
+    author_email='songofacandy at gmail dot com',
+    url='https://github.com/KLab/Flask-PyMemcache',
     description="pymemcache integration for Flask",
     long_description=readme,
     install_requires=["Flask", "pymemcache>=1.2.1"],
