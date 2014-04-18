@@ -72,8 +72,6 @@ class FlaskMemcacheClient(pymemcache.client.Client):
 
 
 class FlaskPyMemcache(object):
-    #: :type: memcache.Client
-    client = None
 
     def __init__(self, app=None, conf_key=None):
         """
@@ -89,14 +87,14 @@ class FlaskPyMemcache(object):
         :type app: flask.Flask
         :parm str conf_key: Key of flask config.
         """
-        conf_key = conf_key or self.conf_key or 'MEMCACHE'
+        conf_key = conf_key or self.conf_key or 'PYMEMCACHE'
         self.conf_key = conf_key
         conf = app.config[conf_key]
         if not isinstance(conf, dict):
             raise TypeError("Flask-PyMemcache conf should be dict")
 
         close_on_teardown = conf.pop('close_on_teardown', False)
-        client = FlaskPyMemcache(**conf)
+        client = FlaskMemcacheClient(**conf)
         app.extensions[self] = client
 
         if close_on_teardown:
@@ -109,4 +107,4 @@ class FlaskPyMemcache(object):
         """
         :rtype: pymemcache.client.Client
         """
-        return current_app.extensions[self]
+        return flask.current_app.extensions[self]
