@@ -12,7 +12,7 @@ def test_simple():
     app = flask.Flask(__name__)
     app.config['PYMEMCACHE'] = {
         'server': ('localhost', 11211),
-        'prefix': b'px'}
+        'key_prefix': b'px'}
     memcache.init_app(app)
 
     with app.app_context():

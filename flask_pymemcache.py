@@ -30,6 +30,7 @@ Put kwargs for pymemcache to `PYMEMCACHE` in your Flask configuration.
         'connect_timeout': 1.0,
         'timeout': 0.5,
         'no_delay': True,
+        'key_prefix': b'myapp-',
     }
 
 You can use different config key with `conf_key` keyword::
@@ -43,7 +44,6 @@ You can use different config key with `conf_key` keyword::
 In addition to normal pymemcache kwargs, Flask-PyMemcache provides following
 configuration options.
 
-* `prefix` -- Add prefix to all key. (Default: b'')
 * `close_on_teardown` -- Close connection to memcached when app teardown.
 
 Use
@@ -57,18 +57,6 @@ Use
 from __future__ import absolute_import, division, print_function
 import flask
 import pymemcache.client
-
-
-class FlaskMemcacheClient(pymemcache.client.Client):
-    """PyMemcache client supporting prefix"""
-    def __init__(self, prefix=b'', **kwargs):
-        if not isinstance(prefix, bytes):
-            prefix = prefix.encode('ascii')
-        self.prefix = prefix
-        super(FlaskMemcacheClient, self).__init__(**kwargs)
-
-    def check_key(self, key):
-        return super(FlaskMemcacheClient, self).check_key(self.prefix + key)
 
 
 class FlaskPyMemcache(object):
@@ -94,8 +82,9 @@ class FlaskPyMemcache(object):
             raise TypeError("Flask-PyMemcache conf should be dict")
 
         close_on_teardown = conf.pop('close_on_teardown', False)
-        client = FlaskMemcacheClient(**conf)
-        app.extensions[self] = client
+        client = pymemcache.client.Client(**conf)
+        app.extensions.setdefault('pymemcache', {})
+        app.extensions['pymemcache'][self] = client
 
         if close_on_teardown:
             @app.teardown_appcontext
@@ -107,4 +96,4 @@ class FlaskPyMemcache(object):
         """
         :rtype: pymemcache.client.Client
         """
-        return flask.current_app.extensions[self]
+        return flask.current_app.extensions['pymemcache'][self]

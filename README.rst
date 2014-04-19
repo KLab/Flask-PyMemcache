@@ -31,6 +31,7 @@ Put kwargs for pymemcache to `PYMEMCACHE` in your Flask configuration.
         'connect_timeout': 1.0,
         'timeout': 0.5,
         'no_delay': True,
+        'key_prefix': b'myapp-',
     }
 
 You can use different config key with `conf_key` keyword::
@@ -44,7 +45,6 @@ You can use different config key with `conf_key` keyword::
 In addition to normal pymemcache kwargs, Flask-PyMemcache provides following
 configuration options.
 
-* `prefix` -- Add prefix to all key. (Default: b'')
 * `close_on_teardown` -- Close connection to memcached when app teardown.
 
 Use
