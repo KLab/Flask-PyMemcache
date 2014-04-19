@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function
 
@@ -18,5 +19,7 @@ setup(
     url='https://github.com/KLab/Flask-PyMemcache',
     description="pymemcache integration for Flask",
     long_description=readme,
-    install_requires=["Flask", "pymemcache>=1.2.3", "six"],
+    install_requires=["Flask", "pymemcache>=1.2.3"],
+    test_require=['pytest'],
+    test_suite='test_flask_pymemcache',
 )
