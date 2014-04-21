@@ -89,7 +89,7 @@ class FlaskPyMemcache(object):
         if close_on_teardown:
             @app.teardown_appcontext
             def close_connection(exc=None):
-                client.disconnect_all()
+                client.close()
 
     @property
     def client(self):

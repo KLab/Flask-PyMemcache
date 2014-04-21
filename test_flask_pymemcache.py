@@ -14,11 +14,14 @@ class TestFlaskPyMemcache(TestCase):
         app = flask.Flask(__name__)
         app.config['PYMEMCACHE'] = {
             'server': ('localhost', 11211),
-            'key_prefix': b'px'}
+            'key_prefix': b'px',
+            'close_on_teardown': True}
         memcache.init_app(app)
 
         with app.app_context():
             memcache.client.set(b'foo', b'bar')
+
+        with app.app_context():
             assert memcache.client.get(b'foo') == b'bar'
 
         assert pymc.get(b'pxfoo') == b'bar'
