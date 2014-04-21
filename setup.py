@@ -12,7 +12,7 @@ except IOError:
 
 setup(
     name="Flask-PyMemcache",
-    version='0.0.4',
+    version='0.0.5',
     py_modules=['flask_pymemcache'],
     author='INADA Naoki',
     author_email='songofacandy at gmail dot com',
