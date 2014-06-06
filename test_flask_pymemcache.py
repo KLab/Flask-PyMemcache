@@ -15,7 +15,7 @@ class TestFlaskPyMemcache(TestCase):
         app.config['PYMEMCACHE'] = {
             'server': ('localhost', 11211),
             'key_prefix': b'px',
-            'close_on_teardown': True}
+            'close_on_teardown': False}
         memcache.init_app(app)
 
         with app.app_context():
