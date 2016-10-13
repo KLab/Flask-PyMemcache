@@ -57,6 +57,7 @@ Use
 from __future__ import absolute_import, division, print_function
 import flask
 import pymemcache.client
+import pymemcache.client.hash
 
 
 class FlaskPyMemcache(object):
@@ -82,7 +83,15 @@ class FlaskPyMemcache(object):
             raise TypeError("Flask-PyMemcache conf should be dict")
 
         close_on_teardown = conf.pop('close_on_teardown', False)
-        client = pymemcache.client.Client(**conf)
+
+        if isinstance(conf['server'], list):
+            conf['servers'] = conf.pop('server')
+            client = pymemcache.client.hash.HashClient(**conf)
+        elif isinstance(conf['server'], tuple):
+            client = pymemcache.client.Client(**conf)
+        else:
+            raise TypeError("Flask-PyMemcache conf['server'] should be tuple or list of tuples")
+
         app.extensions.setdefault('pymemcache', {})
         app.extensions['pymemcache'][self] = client
 
