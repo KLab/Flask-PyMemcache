@@ -4,13 +4,13 @@ from unittest import TestCase
 
 import pymemcache.client
 import flask
-import flask.ext.pymemcache
+import flask_pymemcache
 
 
 class TestFlaskPyMemcache(TestCase):
     def test_simple(self):
         pymc = pymemcache.client.Client(('localhost', 11211))
-        memcache = flask.ext.pymemcache.FlaskPyMemcache()
+        memcache = flask_pymemcache.FlaskPyMemcache()
         app = flask.Flask(__name__)
         app.config['PYMEMCACHE'] = {
             'server': ('localhost', 11211),
