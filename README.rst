@@ -6,7 +6,9 @@ pymemcache_ integration for Flask
 Install
 -------
 
-..code-block:: bash
+Install from https://pypi.org/project/Flask-PyMemcache/
+
+..code:: bash
 
    pip install Flask-PyMemcache
 
