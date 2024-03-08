@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 pymemcache_ integration for Flask
 =================================
@@ -55,13 +54,12 @@ Use
 
 """
 
-from __future__ import absolute_import, division, print_function
 import flask
 import pymemcache.client
 import pymemcache.client.hash
 
 
-class FlaskPyMemcache(object):
+class FlaskPyMemcache:
     def __init__(self, app=None, conf_key=None):
         """
         :type app: flask.Flask
