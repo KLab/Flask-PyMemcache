@@ -6,6 +6,7 @@ build-backend = "hatchling.build"
 name = "Flask-PyMemcache"
 version = "0.0.6"
 description = "pymemcache integration for Flask"
+requires-python = ">=3.7"
 readme = "README.rst"
 license = "MIT"
 authors = [
@@ -28,6 +29,7 @@ rye = { dev-dependencies = [
 ] }
 
 [tool.hatch.build.targets.sdist]
-include = [
-    "/flask_pymemcache",
-]
+packages = ["src/flask_pymemcache.py"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/flask_pymemcache.py"]

@@ -3,8 +3,13 @@ pymemcache_ integration for Flask
 
 .. _pymemcache: https://github.com/pinterest/pymemcache
 
-.. image:: https://travis-ci.org/KLab/Flask-PyMemcache.png
-   :target: https://travis-ci.org/KLab/Flask-PyMemcache
+Install
+-------
+
+..code-block:: bash
+
+   pip install Flask-PyMemcache
+
 
 Initialize
 ----------

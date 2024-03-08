@@ -1,7 +1,0 @@
-services:
-    - memcached
-language: python
-python: 3.3
-before_script:
-    - "pip install --upgrade pip tox virtualenv"
-script: "tox"
