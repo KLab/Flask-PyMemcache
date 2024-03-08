@@ -8,7 +8,7 @@ Install
 
 Install from https://pypi.org/project/Flask-PyMemcache/
 
-..code:: bash
+.. code:: bash
 
    pip install Flask-PyMemcache
 
