@@ -51,25 +51,25 @@ Use
 ::
 
     memcache.client.set('foo', 'bar')
-
 """
 
+from __future__ import annotations
+
 import flask
-import pymemcache.client
-import pymemcache.client.hash
+import pymemcache
 
 
 class FlaskPyMemcache:
-    def __init__(self, app=None, conf_key=None):
+    def __init__(self, app=None, conf_key=None, client_class=None) -> None:
         """
         :type app: flask.Flask
         :parm str conf_key: Key of flask config.
         """
         self.conf_key = conf_key
         if app is not None:
-            self.init_app(app, conf_key)
+            self.init_app(app, conf_key, client_class)
 
-    def init_app(self, app, conf_key=None):
+    def init_app(self, app, conf_key=None, client_class=None) -> None:
         """
         :type app: flask.Flask
         :parm str conf_key: Key of flask config.
@@ -84,9 +84,9 @@ class FlaskPyMemcache:
 
         if isinstance(conf["server"], list):
             conf["servers"] = conf.pop("server")
-            client = pymemcache.client.hash.HashClient(**conf)
+            client = (client_class or pymemcache.HashClient)(**conf)
         elif isinstance(conf["server"], tuple):
-            client = pymemcache.client.Client(**conf)
+            client = (client_class or pymemcache.Client)(**conf)
         else:
             raise TypeError(
                 "Flask-PyMemcache conf['server'] should be tuple or list of tuples"
@@ -102,8 +102,5 @@ class FlaskPyMemcache:
                 client.close()
 
     @property
-    def client(self):
-        """
-        :rtype: pymemcache.client.Client
-        """
+    def client(self) -> pymemcache.Client:
         return flask.current_app.extensions["pymemcache"][self]
